@@ -42,9 +42,9 @@ gurobipy 9.5.1
 
 # 制約条件
 
-$$\sum_{p=1}^P \sum_{q=1}^Q X(i+p, j+q) \geq 1,\quad i=1, 2,...,N-P+1.\quad j=1, 2,...,M-Q+1.$$
+$$\sum_{p=0}^{P-1} \sum_{q=0}^{Q-1} X(i+p, j+q) \geq 1,\quad i=1, 2,...,N-P+1.\quad j=1, 2,...,M-Q+1.$$
 
-$$\sum_{p=1}^P \sum_{q=1}^Q X(i+q, j+p) \geq 1,\quad i=1, 2,...,N-Q+1.\quad j=1, 2,...,M-P+1.$$
+$$\sum_{p=0}^{P-1} \sum_{q=0}^{Q-1} X(i+q, j+p) \geq 1,\quad i=1, 2,...,N-Q+1.\quad j=1, 2,...,M-P+1.$$
 
 
 
