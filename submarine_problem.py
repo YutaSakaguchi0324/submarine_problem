@@ -9,12 +9,12 @@ import numpy as np
 
 #　潜水艦ゲーム
 #　盤面の大きさ N行M列
-N, M = 3, 4
+N, M = 17, 17
 
 #　潜水艦のサイズ　n行m列
-n, m = 1, 1
+P, Q = 3, 5
 # 問題を設定
-submarine_problem = gp.Model(name = "GurobiSample1")
+submarine_problem = gp.Model(name = "submarine_problem")
 
 #　変数を格納する二次元配列を生成する
 X = [[0]*M for i in range(N)]
@@ -35,16 +35,16 @@ summation = sum(flatten(X))
 submarine_problem.setObjective(summation, sense = gp.GRB.MINIMIZE)
 
 # 制約を設定
-for i in range(N - (n - 1)):
-    for j in range(M - (m - 1)):
+for i in range(N - (P - 1)):
+    for j in range(M - (Q - 1)):
         # 横の制約
-        rectangle_list = [X[i+n1][j+m1] for n1 in range(n) for m1 in range(m)]
+        rectangle_list = [X[i+p][j+q] for p in range(P) for q in range(Q)]
         rectangle_summation = sum(rectangle_list)
         submarine_problem.addConstr(rectangle_summation >= 1, name = "horizontal_2" + str(i) + str(j))
         
-for i in range(N - (m - 1)):
-    for j in range(M - (n - 1)):
-        rectangle_list = [X[i+m1][j+n1] for m1 in range(m) for n1 in range(n)]
+for i in range(N - (Q - 1)):
+    for j in range(M - (P - 1)):
+        rectangle_list = [X[i+q][j+p] for q in range(Q) for p in range(P)]
         rectangle_summation = sum(rectangle_list)
         submarine_problem.addConstr(rectangle_summation >= 1, name = "vertical_2" + str(i) + str(j))
         
@@ -54,11 +54,11 @@ submarine_problem.optimize()
 # 最適解が得られた場合、結果を出力
 if submarine_problem.Status == gp.GRB.OPTIMAL:
     # 解の値をndarrayに変換する
-    square = np.zeros((N, M))
+    solution = np.zeros((N, M))
     for i in range(N):
         for j in range(M):
             opt = X[i][j]
-            square[i, j] = opt.X + 0
+            solution[i, j] = opt.X + 0
     # 目的関数の値
     val_opt = submarine_problem.ObjVal
-    print(square)
+    print(solution)
