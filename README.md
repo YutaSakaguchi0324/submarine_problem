@@ -29,8 +29,8 @@ gurobipy 9.5.1
 以上を済ませて実行すると、上記の潜水艦ゲームの解をnumpy.ndarrayで出力します。
 
 (1)
-5×6の盤面
-2×3の潜水艦の場合
+5×6の盤面　2×3の潜水艦の場合
+
 ![image](https://user-images.githubusercontent.com/108399244/176725295-33273157-6425-437b-81d9-a766213a78b4.png)
 
 
